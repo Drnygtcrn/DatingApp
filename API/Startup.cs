@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using API.Extentions;
+using System.Text.Json.Serialization;
 
 namespace API
 {
@@ -38,6 +39,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             
+           
             services.AddApplicationServices(_config);
             services.AddControllers();
             services.AddCors();
