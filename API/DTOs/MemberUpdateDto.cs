@@ -7,7 +7,7 @@ namespace API.DTOs
 {
     public class MemberUpdateDto
     {
-        public string Introducton { get; set; }
+        public string Introduction { get; set; }
 
         public string LookingFor { get; set; }
         
