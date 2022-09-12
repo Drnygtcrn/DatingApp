@@ -1,7 +1,10 @@
+using API.Data;
+
 namespace API.DTOs
 {
-    public class UserDto
+    public class UserDto : BaseDTO
     {
+          
         public string Username { get; set; }
         public string Token { get; set; }
         public string PhotoUrl { get; set; }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -25,7 +26,20 @@ namespace API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            if (await UserExists(registerDto.Username)) return BadRequest("Username is taken");
+           if (await UserExists(registerDto.Username))
+           {
+                
+
+             return new UserDto
+            {
+                IsSuccessful = false,
+                message = "User exists"
+
+            };
+
+                
+                
+           }
             var user = _mapper.Map<AppUser>(registerDto);
             using var hmac = new HMACSHA512();
             user.UserName = registerDto.Username.ToLower();

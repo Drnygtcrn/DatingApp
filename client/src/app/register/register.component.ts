@@ -3,6 +3,8 @@ import { AccountService } from '../_services/account.service';
 import { ToastrService } from 'ngx-toastr';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserParams } from '../_models/userParams';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-register',
@@ -10,6 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  
   @Output() cancelRegister = new EventEmitter();
   registerForm: FormGroup;
   maxDate: Date;
@@ -19,9 +22,11 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
+    
     this.intitializeForm();
     this.maxDate = new Date();
     this.maxDate.setFullYear(this.maxDate.getFullYear() -18);
+    
   }
 
   intitializeForm() {
@@ -47,9 +52,13 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.accountService.register(this.registerForm.value).subscribe(response => {
+      console.log(response);
+      this.toastr.error(response.message);
+
       this.router.navigateByUrl('/members');
     }, error => {
       this.validationErrors = error;
+      this.toastr.error(error.error);
     })
   }
 
